@@ -8,3 +8,7 @@ previa-site/
 ia_ultima_entrada.txt
 ia_ultima_resposta.txt
 vistos.bak.json
+
+# Rascunhos do Senso Comum
+.senso/
+previa-senso/

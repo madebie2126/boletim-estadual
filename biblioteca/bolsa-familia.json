@@ -1,0 +1,62 @@
+{
+  "slug": "bolsa-familia",
+  "tema": "Bolsa Família",
+  "senso_comum": [
+    "Bolsa Família é para quem não gosta de trabalhar.",
+    "As pessoas têm mais filhos só para ganhar mais Bolsa Família.",
+    "Bolsa Família é dinheiro jogado fora."
+  ],
+  "dica_quem_decide": "As regras e o dinheiro são da União (governo federal, aprovados pelo Congresso). O cadastro (CadÚnico) e o acompanhamento das famílias são feitos pelas prefeituras, nos CRAS. Escola e posto de saúde, que acompanham as condições do programa, são em geral municipais ou estaduais.",
+  "fontes": [
+    {
+      "titulo": "Bolsa Família e mortalidade infantil (resumo do estudo publicado na The Lancet, 2013)",
+      "orgao": "Ipea / Centro Internacional de Políticas para o Crescimento Inclusivo",
+      "url": "https://repositorio.ipea.gov.br/bitstream/11058/14915/5/pt-br_IPCOnePager242.pdf"
+    },
+    {
+      "titulo": "Bolsa Família e fecundidade (resumo de estudos)",
+      "orgao": "Ipea / Centro Internacional de Políticas para o Crescimento Inclusivo",
+      "url": "https://repositorio.ipea.gov.br/bitstream/11058/14906/5/pt-br_IPCOnePager227.pdf"
+    },
+    {
+      "titulo": "Efeitos macroeconômicos do Bolsa Família (multiplicador do gasto)",
+      "orgao": "Ipea / Centro Internacional de Políticas para o Crescimento Inclusivo",
+      "url": "https://repositorio.ipea.gov.br/bitstream/11058/15057/5/pt-br_IPCOnePager244.pdf"
+    },
+    {
+      "titulo": "Estudo na The Lancet Public Health (2025): mortes e internações evitadas pelo Bolsa Família entre 2000 e 2019",
+      "orgao": "ISGlobal / Universidade Federal da Bahia (comunicado à imprensa, em inglês)",
+      "url": "https://www.eurekalert.org/news-releases/1085684"
+    },
+    {
+      "titulo": "Programa social no Brasil evitou 8 milhões de internações e 713 mil mortes em 20 anos",
+      "orgao": "ISGlobal (comunicado à imprensa, em espanhol)",
+      "url": "https://www.isglobal.org/-/un-programa-social-en-brasil-evita-8-millones-de-hospitalizaciones-y-713.000-muertes-en-los-ultimos-20-anos"
+    },
+    {
+      "titulo": "O Bolsa Família afeta a fecundidade? (Texto para Discussão, 2017)",
+      "orgao": "Instituto de Economia da UFRJ",
+      "url": "https://www.ie.ufrj.br/images/IE/TDS/2017/TD_IE_019_2017_ROCHA.pdf"
+    },
+    {
+      "titulo": "Efeitos do Bolsa Família sobre a fecundidade (Revista Brasileira de Economia)",
+      "orgao": "FGV / SciELO",
+      "url": "https://scielo.br/j/rbe/a/JBY5LPpQ3Rz8YXSyVLDhzFP/abstract/?lang=pt"
+    },
+    {
+      "titulo": "2,74 milhões de famílias que aumentaram a renda com trabalho continuam no Bolsa Família pela regra de proteção (2024)",
+      "orgao": "Agência Gov (governo federal)",
+      "url": "https://agenciagov.ebc.com.br/noticias/202403/2-74-milhoes-de-familias-que-aumentaram-a-renda-com-trabalho-continuam-no-bolsa-familia-pela-regra-de-protecao"
+    },
+    {
+      "titulo": "Em 2024, mais de 98% dos empregos gerados no Caged foram ocupados pelo público do Cadastro Único",
+      "orgao": "Agência Gov (governo federal)",
+      "url": "https://agenciagov.ebc.com.br/noticias/202502/em-2024-mais-de-98-dos-empregos-gerados-no-caged-foram-ocupados-pelo-publico-do-cadastro-unico"
+    },
+    {
+      "titulo": "Bolsa Família: regras, valores e condições",
+      "orgao": "Ministério do Desenvolvimento e Assistência Social (MDS)",
+      "url": "https://www.gov.br/mds/pt-br/acoes-e-programas/bolsa-familia"
+    }
+  ]
+}

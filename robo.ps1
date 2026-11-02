@@ -261,10 +261,16 @@ function Card-Assunto($r, $quente) {
       $tambem = "<tr><td style='padding:0 20px 14px;font-size:12px;color:$($cor.suave)'>Também em: $links</td></tr>"
     }
   }
+  $decide = ''
+  if ($r.quem_decide) {
+    $porque = if ($r.por_que_decide) { " <span style='color:$($cor.suave)'>$(Html $r.por_que_decide)</span>" } else { '' }
+    $decide = "<div style='margin-top:8px;font-size:13px;line-height:1.45'><span style='display:inline-block;background:$($cor.azul);color:#fff;font-size:10px;font-weight:bold;letter-spacing:.6px;padding:2px 8px;border-radius:10px;margin-right:6px'>QUEM DECIDE: $(Html ([string]$r.quem_decide).ToUpper())</span>$porque</div>"
+  }
   $corpo = @"
 <tr><td style='padding:18px 20px 6px'>
   $selo
   <div style='font-size:17px;line-height:1.35;font-weight:bold;color:$($cor.texto)'>$(Html $r.manchete)</div>
+  $decide
 </td></tr>
 <tr><td style='padding:6px 20px 4px'>
   <div style='font-size:11px;font-weight:bold;letter-spacing:.8px;color:$($cor.destaque)'>O QUE MUDA</div>
@@ -322,6 +328,11 @@ $plural = if ($total -eq 1) { '1 decisão' } else { "$total decisões" }
 $linhaResumo = if ($vazio) { 'Sem novidades hoje' } elseif ($estados.Count -gt 0) { "$plural em $($estados.Count) " + $(if ($estados.Count -eq 1) { 'estado' } else { 'estados' }) } else { "$total notícias filtradas" }
 $chips = ($estados | ForEach-Object { "<span style='display:inline-block;background:rgba(255,255,255,.14);color:#fff;font-size:12px;padding:3px 10px;border-radius:12px;margin:6px 6px 0 0'>$(Html $_)</span>" }) -join ''
 
+# O menu só mostra "Senso Comum" depois que a primeira edição dele for aprovada e publicada
+function Link-Senso($prefixo) {
+  if (Test-Path "$base\docs\senso-comum.html") { " &nbsp;·&nbsp; <a href='${prefixo}senso-comum.html' target='_self' style='color:$($cor.destaque);text-decoration:none'>Senso Comum</a>" } else { '' }
+}
+
 # A mesma página serve para o e-mail e para o site; o site ganha cabeçalho de navegação e ícone de app
 function Pagina($site = $false, $prefixo = '') {
   $head = ''
@@ -338,7 +349,7 @@ function Pagina($site = $false, $prefixo = '') {
 <link rel='apple-touch-icon' href='${prefixo}icone-180.png'>
 <base target='_blank'>
 "@
-    $nav = "<tr><td style='padding:0 4px 12px;font-size:13px'><a href='${prefixo}index.html' target='_self' style='color:$($cor.azul);font-weight:bold;text-decoration:none'>Boletim Estadual</a><span style='float:right'><a href='${prefixo}index.html' target='_self' style='color:$($cor.destaque);text-decoration:none'>Hoje</a> &nbsp;·&nbsp; <a href='${prefixo}arquivo.html' target='_self' style='color:$($cor.destaque);text-decoration:none'>Edições anteriores</a></span></td></tr>"
+    $nav = "<tr><td style='padding:0 4px 12px;font-size:13px'><a href='${prefixo}index.html' target='_self' style='color:$($cor.azul);font-weight:bold;text-decoration:none'>Boletim Estadual</a><span style='float:right'><a href='${prefixo}index.html' target='_self' style='color:$($cor.destaque);text-decoration:none'>Hoje</a>$(Link-Senso $prefixo) &nbsp;·&nbsp; <a href='${prefixo}arquivo.html' target='_self' style='color:$($cor.destaque);text-decoration:none'>Edições anteriores</a></span></td></tr>"
   }
   @"
 <!DOCTYPE html>
@@ -410,7 +421,7 @@ function Gerar-Site($pasta) {
 <link rel='manifest' href='manifest.webmanifest'><link rel='icon' href='icone.svg' type='image/svg+xml'><link rel='apple-touch-icon' href='icone-180.png'></head>
 <body style='margin:0;padding:24px 12px;background:$($cor.fundo);font-family:Segoe UI,Helvetica,Arial,sans-serif'>
 <div style='max-width:640px;margin:0 auto'>
-  <div style='padding:0 4px 12px;font-size:13px'><a href='index.html' style='color:$($cor.azul);font-weight:bold;text-decoration:none'>Boletim Estadual</a><span style='float:right'><a href='index.html' style='color:$($cor.destaque);text-decoration:none'>Hoje</a></span></div>
+  <div style='padding:0 4px 12px;font-size:13px'><a href='index.html' style='color:$($cor.azul);font-weight:bold;text-decoration:none'>Boletim Estadual</a><span style='float:right'><a href='index.html' style='color:$($cor.destaque);text-decoration:none'>Hoje</a>$(Link-Senso '')</span></div>
   <div style='background:$($cor.azul);border-radius:10px;padding:22px 24px;margin-bottom:18px'>
     <div style='font-size:11px;font-weight:bold;letter-spacing:2px;color:#9fc3ee'>BOLETIM ESTADUAL</div>
     <div style='font-size:22px;font-weight:bold;color:#fff;margin-top:6px'>Edições anteriores</div>

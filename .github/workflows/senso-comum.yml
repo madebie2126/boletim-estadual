@@ -1,0 +1,61 @@
+name: Senso Comum (quinzenal)
+
+on:
+  schedule:
+    - cron: '0 11 1,16 * *'   # dias 1 e 16, 08:00 em Brasília
+  workflow_dispatch:
+    inputs:
+      tema:
+        description: 'Tema da biblioteca (ex.: bolsa-familia). Vazio = o robô escolhe.'
+        required: false
+        default: ''
+
+permissions:
+  contents: write
+  pull-requests: write
+
+concurrency: senso-comum
+
+jobs:
+  rascunho:
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Fuso horário de Brasília
+        shell: powershell
+        run: tzutil /s "E. South America Standard Time"
+
+      - name: Escrever o rascunho
+        shell: powershell
+        env:
+          EMAIL_CONTA: ${{ secrets.EMAIL_CONTA }}
+          EMAIL_DESTINATARIO: ${{ secrets.EMAIL_DESTINATARIO }}
+          SENHA_EMAIL: ${{ secrets.SENHA_EMAIL }}
+          CHAVE_GEMINI: ${{ secrets.CHAVE_GEMINI }}
+        run: .\senso-comum.ps1 -Tema "${{ github.event.inputs.tema }}"
+
+      - name: Abrir proposta para revisão
+        id: proposta
+        shell: bash
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          ramo=$(cat .senso/ramo.txt)
+          titulo=$(cat .senso/titulo.txt)
+          git config user.name "Robo Boletim"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git checkout -b "$ramo"
+          git add docs
+          git commit -m "Senso Comum (rascunho): $titulo"
+          git push -f -u origin "$ramo"
+          url=$(gh pr create --base main --head "$ramo" --title "Senso Comum: $titulo" --body-file .senso/proposta.md)
+          echo "url=$url" >> "$GITHUB_OUTPUT"
+
+      - name: Avisar por e-mail
+        shell: powershell
+        env:
+          EMAIL_CONTA: ${{ secrets.EMAIL_CONTA }}
+          EMAIL_DESTINATARIO: ${{ secrets.EMAIL_DESTINATARIO }}
+          SENHA_EMAIL: ${{ secrets.SENHA_EMAIL }}
+        run: .\senso-comum.ps1 -Avisar -LinkRevisao "${{ steps.proposta.outputs.url }}"

@@ -67,4 +67,21 @@ Tudo fica no `config.json`:
 
 O robô guarda em `vistos.json` o que já mandou, para não repetir notícia. O histórico de execuções fica em `robo.log`.
 
+## 6. Senso Comum (a cada 15 dias)
+
+Nos dias 1 e 16 de cada mês, o robô `senso-comum.ps1` pega um tema da pasta `biblioteca/` e lê **somente** as fontes cadastradas para ele (estudos, órgãos oficiais, PDFs). A partir delas, escreve:
+- o texto do site: **O que dizem × O que os dados mostram**, quem decide e o que observar no voto;
+- um **kit para explicar**: resumo em 3 frases, palavras difíceis → simples, jeitos de explicar e o que NÃO dizer.
+
+Antes de chegar até você, o texto passa por duas conferências:
+- cada número precisa trazer um trecho literal da fonte, e o robô verifica se esse trecho existe mesmo no texto;
+- um segundo robô, o "revisor", aponta frases que vão além dos dados, e o rascunho é reescrito.
+
+O que não puder ser confirmado aparece em **"Confira antes de aprovar"**.
+
+**Nada é publicado sozinho.** O rascunho vira uma proposta (pull request) no GitHub e você recebe um e-mail. Para publicar, toque em **Merge pull request** (pelo app do GitHub no celular, por exemplo). Para descartar, toque em **Close pull request**.
+
+- **Gerar na hora:** Actions → Senso Comum (quinzenal) → Run workflow. Dá para escrever o tema, ex.: `bolsa-familia`.
+- **Novo tema:** crie `biblioteca/<tema>.json`, seguindo o modelo de `bolsa-familia.json`, com as frases do senso comum, a dica de quem decide e os links das fontes. A pesquisa automática na internet não está disponível na faixa gratuita do Gemini, por isso as fontes são escolhidas a dedo.
+
 **Limitações:** o Governo do RJ (rj.gov.br) e a ALESP não publicam feed aberto, então chegam só pela imprensa. Os resumos da IA usam apenas a manchete e o trecho inicial da notícia. Confira a fonte antes de tomar qualquer decisão.
