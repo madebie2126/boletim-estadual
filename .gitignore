@@ -1,0 +1,10 @@
+# Senhas e chaves: nunca vão para o GitHub
+segredos.json
+
+# Arquivos de teste e diagnóstico
+robo.log
+previa.html
+previa-site/
+ia_ultima_entrada.txt
+ia_ultima_resposta.txt
+vistos.bak.json

@@ -1,0 +1,39 @@
+name: Boletim diário
+
+on:
+  schedule:
+    - cron: '0 10 * * *'   # 07:00 em Brasília (o GitHub pode atrasar alguns minutos)
+  workflow_dispatch:        # botão "Run workflow" para rodar na hora
+
+permissions:
+  contents: write
+
+concurrency: boletim
+
+jobs:
+  boletim:
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Fuso horário de Brasília
+        shell: powershell
+        run: tzutil /s "E. South America Standard Time"
+
+      - name: Rodar o robô
+        shell: powershell
+        env:
+          EMAIL_CONTA: ${{ secrets.EMAIL_CONTA }}
+          EMAIL_DESTINATARIO: ${{ secrets.EMAIL_DESTINATARIO }}
+          SENHA_EMAIL: ${{ secrets.SENHA_EMAIL }}
+          CHAVE_GEMINI: ${{ secrets.CHAVE_GEMINI }}
+        run: .\robo.ps1
+
+      - name: Publicar site e histórico
+        shell: bash
+        run: |
+          git config user.name "Robo Boletim"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add docs vistos.json
+          git diff --cached --quiet || git commit -m "Boletim $(date +%F)"
+          git push

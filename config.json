@@ -1,0 +1,112 @@
+{
+    "janela_horas":  36,
+    "max_itens":  70,
+    "enviar_quando_vazio":  false,
+    "buscas":  [
+                   "\"governador sanciona\" OR \"sanciona lei\" OR \"lei estadual\"",
+                   "\"assembleia legislativa aprova\" OR \"Alerj aprova\" OR \"Alesp aprova\" OR \"ALMG aprova\" OR \"Ales aprova\"",
+                   "\"decreto estadual\" OR \"governo do estado publica decreto\"",
+                   "IPVA OR \"ICMS estadual\" OR \"tarifa intermunicipal\" governo do estado",
+                   "\"Governo do Rio\" OR \"Governo do Estado do Rio\" lei OR decreto",
+                   "ICMS gasolina OR diesel OR \"gás de cozinha\" OR combustíveis OR Confaz OR Comsefaz",
+                   "\"conta de luz\" OR \"tarifa de ônibus\" OR \"passagem\" OR \"tarifa de água\" reajuste estado OR governo estadual",
+                   "IPVA 2027 OR \"isenção de IPVA\" OR \"desconto no IPVA\""
+               ],
+    "fontes_oficiais":  [
+                            {
+                                "nome":  "ALERJ (Assembleia do RJ)",
+                                "estado":  "RJ",
+                                "tipo":  "alerj",
+                                "url":  "https://www.alerj.rj.gov.br/"
+                            },
+                            {
+                                "nome":  "Agência SP (Governo de SP)",
+                                "estado":  "SP",
+                                "tipo":  "rss",
+                                "url":  "https://www.agenciasp.sp.gov.br/feed/"
+                            },
+                            {
+                                "nome":  "Agência Minas (Governo de MG)",
+                                "estado":  "MG",
+                                "tipo":  "rss",
+                                "url":  "https://www.agenciaminas.mg.gov.br/rss"
+                            },
+                            {
+                                "nome":  "ALMG (Assembleia de MG)",
+                                "estado":  "MG",
+                                "tipo":  "rss",
+                                "url":  "https://www.almg.gov.br/rss/noticias.xml"
+                            }
+                        ],
+    "palavras_obrigatorias":  [
+                                  "sanciona",
+                                  "sancionada",
+                                  "sancionou",
+                                  "aprova",
+                                  "aprovada",
+                                  "aprovou",
+                                  "lei",
+                                  "leis",
+                                  "decreto",
+                                  "IPVA",
+                                  "ICMS",
+                                  "ITCMD",
+                                  "tarifa",
+                                  "governador",
+                                  "governadora",
+                                  "assembleia",
+                                  "Alerj",
+                                  "Alesp",
+                                  "ALMG",
+                                  "Ales",
+                                  "gasolina",
+                                  "diesel",
+                                  "etanol",
+                                  "gás",
+                                  "combustível",
+                                  "combustíveis",
+                                  "Confaz",
+                                  "Comsefaz",
+                                  "governadores",
+                                  "reajuste",
+                                  "aumento",
+                                  "isenção",
+                                  "passagem",
+                                  "conta de luz"
+                              ],
+    "palavras_proibidas":  [
+                               "Presidente da República",
+                               "Planalto",
+                               "Congresso",
+                               "Senado",
+                               "Câmara dos Deputados",
+                               "STF",
+                               "Supremo",
+                               "lei federal",
+                               "Câmara Municipal",
+                               "vereador",
+                               "vereadores",
+                               "prefeito",
+                               "prefeita",
+                               "prefeitura",
+                               "municipal"
+                           ],
+    "ia":  {
+               "provedor":  "gemini",
+               "_provedores_possiveis":  "nenhum | gemini | openai | anthropic | ollama",
+               "modelo_gemini":  "gemini-3.5-flash",
+               "modelo_openai":  "gpt-4o-mini",
+               "modelo_anthropic":  "claude-haiku-5-5",
+               "modelo_ollama":  "llama3.1",
+               "prompt":  "Você é um analista que explica política estadual para o cidadão comum, em português simples, sem juridiquês. Abaixo há uma lista numerada de notícias (manchete, veículo e, às vezes, um trecho). Muitas falam do MESMO assunto em veículos diferentes.\n\nPASSO 1 — AGRUPE: junte em um único assunto todas as notícias que tratam do mesmo fato ou decisão (ex.: várias matérias sobre o aumento do ICMS dos combustíveis viram UM assunto, mesmo que umas falem da Bahia, outras de SP e outras da briga política em torno dele). Liste em \"indices\" TODOS os números das notícias daquele assunto.\n\nPASSO 2 — FILTRE os assuntos. Avalie CADA assunto separadamente, inclusive os que aparecem em uma única notícia: um assunto grande não substitui os pequenos, e o resultado normalmente tem vários assuntos. INCLUA os que envolvem decisão, lei, decreto, projeto aprovado na assembleia, programa, benefício, isenção, tarifa, imposto ou serviço público de GOVERNOS ESTADUAIS ou ASSEMBLEIAS LEGISLATIVAS que afete o dia a dia ou o bolso (IPVA, ICMS, ITCMD, combustíveis, gás, transporte, água, energia, saúde, educação, segurança, comércio, feriados, consumidor, servidores estaduais, orçamento do estado). Decisões do Confaz ou do Comsefaz CONTAM como estaduais: são os estados decidindo juntos. Na dúvida, inclua. DESCARTE: decisão federal (Presidente, Congresso, STF, ministérios, leis federais) ou municipal (prefeitos, vereadores); homenagens e datas comemorativas; crimes e ocorrências policiais. Briga política sobre uma decisão estadual NÃO é motivo para descartar: agrupe-a junto com a decisão.\n\nPASSO 3 — ESCREVA cada assunto. Use APENAS o que está nos textos, sem inventar números, datas ou detalhes. Se ainda não está valendo (ex.: aprovado, mas só vale em 2027, ou falta sanção), diga isso em o_que_muda. Em estado, use a sigla da UF; se valer para vários estados, use \"Vários estados\"; se não der para saber, use \"Estado não informado\".\n\nResponda SOMENTE com JSON no formato {\"itens\":[{\"indices\":[0,4,9],\"estado\":\"RJ\",\"manchete\":\"título curto e claro\",\"o_que_muda\":\"1 ou 2 frases simples\",\"impacto\":\"1 frase sobre como afeta o bolso ou a rotina\"}]}. Se nada for relevante, responda {\"itens\":[]}."
+           },
+    "email":  {
+                  "servidor_smtp":  "smtp.gmail.com",
+                  "porta":  587,
+                  "assunto":  "Leis estaduais do dia",
+                  "_obs":  "Conta e destinatário ficam no segredos.json (PC) ou nos Secrets do GitHub (nuvem). Vários destinatários: separe por vírgula."
+              },
+    "agendamento_hora":  "07:00",
+    "mais_discutidos_minimo":  3,
+    "mais_discutidos_max":  5
+}

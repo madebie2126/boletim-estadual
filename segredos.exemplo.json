@@ -1,0 +1,8 @@
+{
+    "email_conta":  "SEU_EMAIL@gmail.com",
+    "email_destinatario":  "SEU_EMAIL@gmail.com",
+    "senha_email":  "SENHA_DE_APP_DO_EMAIL",
+    "chave_gemini":  "",
+    "chave_openai":  "",
+    "chave_anthropic":  ""
+}
