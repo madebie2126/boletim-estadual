@@ -168,7 +168,11 @@ function Gemini-Json($partesPedido, $temperatura) {
         -ContentType 'application/json; charset=utf-8' -UseBasicParsing -TimeoutSec 600
       $texto = (([Text.Encoding]::UTF8.GetString($r.RawContentStream.ToArray())) | ConvertFrom-Json).candidates[0].content.parts[0].text
       return ($texto.Substring($texto.IndexOf('{'), $texto.LastIndexOf('}') - $texto.IndexOf('{') + 1) | ConvertFrom-Json)
-    } catch { Log "Chamada à IA falhou (tentativa $tentativa): $($_.Exception.Message)" }
+    } catch {
+      Log "Chamada à IA falhou (tentativa $tentativa): $($_.Exception.Message)"
+      # A faixa gratuita limita chamadas por minuto: espera antes de tentar de novo
+      if ($tentativa -lt 3) { Start-Sleep -Seconds (40 * $tentativa) }
+    }
   }
   return $null
 }

@@ -49,7 +49,13 @@ jobs:
           git add docs
           git commit -m "Senso Comum (rascunho): $titulo"
           git push -f -u origin "$ramo"
-          url=$(gh pr create --base main --head "$ramo" --title "Senso Comum: $titulo" --body-file .senso/proposta.md)
+          # Se já existe proposta aberta para este rascunho, atualiza em vez de criar outra
+          url=$(gh pr list --head "$ramo" --state open --json url -q '.[0].url')
+          if [ -n "$url" ]; then
+            gh pr edit "$url" --title "Senso Comum: $titulo" --body-file .senso/proposta.md
+          else
+            url=$(gh pr create --base main --head "$ramo" --title "Senso Comum: $titulo" --body-file .senso/proposta.md)
+          fi
           echo "url=$url" >> "$GITHUB_OUTPUT"
 
       - name: Avisar por e-mail
