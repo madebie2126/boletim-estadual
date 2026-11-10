@@ -1,5 +1,15 @@
 ﻿[
     {
+        "dia":  "2026-11-10",
+        "data":  "terça-feira, 10/11/2026",
+        "resumo":  "70 notícias filtradas",
+        "manchetes":  [
+                          "Justiça acolhe recurso da Arsesp e da PGE-SP para garantir benefícios tributários aos consumidores de gás",
+                          "Visita à Escola de Design reforça importância de projeto sobre moda sustentável",
+                          "Órfãos de vítimas de feminicídio contam com política específica de proteção"
+                      ]
+    },
+    {
         "dia":  "2026-11-09",
         "data":  "segunda-feira, 09/11/2026",
         "resumo":  "8 decisões em 6 estados",
