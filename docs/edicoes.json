@@ -1,5 +1,15 @@
 ﻿[
     {
+        "dia":  "2026-11-23",
+        "data":  "segunda-feira, 23/11/2026",
+        "resumo":  "35 notícias filtradas",
+        "manchetes":  [
+                          "DESENVOLVIMENTO ECONÔMICO: AS LEIS QUE MOVEM O ESTADO DO RIO",
+                          "Cláudio Ferreira sanciona lei que proíbe acúmulo de adicionais de insalubridade e periculosidade em Rondonópolis",
+                          "IPVA 2027 em Sergipe: veja como emitir o boleto na Sefaz, regras de desconto e quem tem isenção"
+                      ]
+    },
+    {
         "dia":  "2026-11-22",
         "data":  "domingo, 22/11/2026",
         "resumo":  "10 decisões em 10 estados",
